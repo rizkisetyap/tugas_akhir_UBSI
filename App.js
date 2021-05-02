@@ -16,8 +16,16 @@ import RegisterScreen from "./components/auth/Register";
 import WelcomeScreen from "./components/auth/Welcome";
 
 import LoadingScreen from "./components/stateless/Loading";
+import { LogBox } from "react-native";
 
+LogBox.ignoreLogs(["Setting a timer"]);
 const Stack = createStackNavigator();
+//redux
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import RootReducer from "./redux/reducer/index";
+import thunk from "redux-thunk";
+const store = createStore(RootReducer, applyMiddleware(thunk));
 
 class App extends Component {
   constructor(props) {
@@ -67,11 +75,17 @@ class App extends Component {
     }
 
     return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="WelcomeScreen">
-          <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="WelcomeScreen">
+            <Stack.Screen
+              name="WelcomeScreen"
+              component={WelcomeScreen}
+              options={{ title: "Welcome" }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     );
   }
 }

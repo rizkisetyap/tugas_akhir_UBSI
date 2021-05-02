@@ -23,7 +23,14 @@ class Register extends Component {
         password.trim()
       )
       .then((result) => {
-        console.log(result);
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(firebase.auth().currentUser.uid)
+          .set({
+            nama,
+            email: email.trim().toLowerCase(),
+          });
       })
       .catch((error) => {
         console.log(error.code);
@@ -36,7 +43,7 @@ class Register extends Component {
       <View>
         <Text>Register</Text>
         <TextInput
-          placeholder="Namq . . ."
+          placeholder="Nama . . ."
           onChangeText={(nama) => this.setState({ nama })}
         />
         <TextInput
