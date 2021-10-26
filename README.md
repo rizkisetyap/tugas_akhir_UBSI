@@ -1,3 +1,4 @@
 # tugas_akhir_UBSI Purwokerto
-### Nama : Rizki Setya Pambudi
-### Nim : 13180373
+## KARTU MENUJU SEHAT (KMS) BERBASIS ANDROID
+#### Nama : Rizki Setya Pambudi
+#### Nim : 13180373
