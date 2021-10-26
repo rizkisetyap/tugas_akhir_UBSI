@@ -1,7 +1,8 @@
-import { USER_LOGIN } from "../constants/index";
+import { USER_LOGIN, USER_LOGOUT } from "../constants/index";
 
 const initialState = {
   currentUser: null,
+  isLoggedin: false,
 };
 
 const Reducer = (state = initialState, action) => {
@@ -10,6 +11,13 @@ const Reducer = (state = initialState, action) => {
       return {
         ...state,
         currentUser: action.currentUser,
+        isLoggedin: action.isLoggedin,
+      };
+    case USER_LOGOUT:
+      return {
+        ...state,
+        currentUser: null,
+        isLoggedin: false,
       };
     default:
       return state;

@@ -1,29 +1,25 @@
-import React, { Component } from "react";
-import firebase from "firebase";
-import { View, Text, Button } from "react-native";
-
+import React, { Component, useState, useEffect } from "react";
+import { createStackNavigator } from "@react-navigation/stack";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import HomeScreen from "../main/Home";
 import { fetchUser } from "../../redux/actions/index";
-class Welcome extends Component {
-  componentDidMount() {
-    this.props.fetchUser();
-  }
 
-  render() {
-    const { currentUser } = this.props;
+const Stack = createStackNavigator();
 
-    if (!currentUser) {
-      return <View />;
+function Welcome({ fetchUser, currentUser }) {
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      fetchUser();
     }
-    return (
-      <View>
-        <Text>User Authenticated</Text>
-        <Text>{JSON.stringify(currentUser)}</Text>
-      </View>
-    );
-  }
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+  return <Stack.Screen name="Home" component={HomeScreen} />;
 }
 
 const mapStateToProps = (store) => ({
