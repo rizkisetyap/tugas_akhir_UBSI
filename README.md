@@ -17,8 +17,10 @@ yarn global add expo-cli
 
 ## Run
 ```bash
-### dev
+#install dependencies
+yarn install
+# dev
 expo android
-### build android
+#build android
 expo build:android
 ```
